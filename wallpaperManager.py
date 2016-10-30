@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!python
 
 import os
 import random
@@ -27,5 +27,6 @@ except:
 sleep(1)
 
 # change wallpaper using shell command
-command = "gsettings set org.gnome.desktop.background picture-uri file:///" + dirPath + "/" + wallpaperName
+DBUS_SESSION_BUS_ADDRESS = "PID=$(pgrep gnome-session) && export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2-) && "
+command = DBUS_SESSION_BUS_ADDRESS + "gsettings set org.gnome.desktop.background picture-uri file:///" + dirPath + "/" + wallpaperName
 os.system(command)
