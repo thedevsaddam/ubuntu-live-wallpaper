@@ -1,5 +1,16 @@
 #!python
 
+#title           :Ubuntu-live-wallpaper
+#description     :This script will change the ubuntu wallper form live image source
+#author          :Saddam H
+#date            :2016-10-30
+#version         :0.1
+#usage           :python wallpaperManager.py
+#notes           :Follow me @thedevsaddam
+#python_version  :2.6.6
+#==============================================================================
+
+# Import essential libraries
 import os
 import random
 import urllib
