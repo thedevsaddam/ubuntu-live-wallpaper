@@ -34,7 +34,7 @@ Copy the line below and paste
 ```
 Replace YOUR_USER_NAME by your user name.
 
-_ Note:  To get username type `whoami` interminal_
+_Note:  To get username type `whoami` interminal_
 
 The Cron job will run the script every five minutes and change your wallpaper. You can configure the Cron job to change the refresh time.
 ### TODO
