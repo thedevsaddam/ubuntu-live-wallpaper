@@ -19,7 +19,7 @@ dirPath = os.path.dirname(os.path.realpath(__file__))
 # download image
 try:
     wallpaperName = 'wallpaper.jpg'
-    response = urllib.urlretrieve(imageUrl, wallpaperName)
+    response = urllib.urlretrieve(imageUrl, dirPath + "/" + wallpaperName)
 except:
     wallpaperName = "default-wallpaper.jpg"  # if download failed show the default wallpaper
 
