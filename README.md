@@ -38,6 +38,7 @@ _Note:  To get username type `whoami` in interminal_
 
 The Cron job will run the script every five minutes and change the wallpaper. You can configure the Cron job to change the refresh time.
 ### TODO
+* Detect largest resolution among the connected monitors
 * Change wallpaper by season
 * Change wallpaper by morning, mid-day, evening and night
 * Easy installation
