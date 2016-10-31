@@ -47,8 +47,42 @@ def set_wallpaper(file_name):
     os.system(command)
 
 
+def get_max(list_of_string):
+    """Return maximum value form a list of string or integer """
+    return max(map(int, list_of_string))
+
+
 def get_window_size():
     """Return the window width and height"""
-    width = os.popen("xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f1").read().strip("\n")
-    height = os.popen("xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f2").read().strip("\n")
-    return int(width), int(height)
+    width = os.popen(
+        "PID=$(pgrep gnome-session) && export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2-) && xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f1").read().strip("\n")
+    height = os.popen(
+        "PID=$(pgrep gnome-session) && export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2-) && xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f2").read().strip("\n")
+    if '\n' in width:
+        widths = width.split('\n')
+        heights = height.split('\n')
+        return widths, heights
+    else:
+        return width, height
+
+
+def get_max_window_size():
+    """Return maximum resolution of connected monitors"""
+    window_sizes = list(get_window_size())
+    widths = []
+    heights = []
+
+    if isinstance(window_sizes[0], (list, tuple)):
+        for window_size in window_sizes[0]:
+            widths.append(window_size)
+
+        for window_size in window_sizes[1]:
+            heights.append(window_size)
+
+        width = get_max(widths)
+        height = get_max(heights)
+    else:
+        width = int(window_sizes[0])
+        height = int(window_sizes[1])
+
+    return width, height
