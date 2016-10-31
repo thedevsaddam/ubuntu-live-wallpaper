@@ -55,9 +55,9 @@ def get_max(list_of_string):
 def get_window_size():
     """Return the window width and height"""
     width = os.popen(
-        "PID=$(pgrep gnome-session) && export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2-) && xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f1").read().strip("\n")
+        "export DISPLAY=:0 && xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f1").read().strip("\n")
     height = os.popen(
-        "PID=$(pgrep gnome-session) && export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2-) && xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f2").read().strip("\n")
+        "export DISPLAY=:0 && xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f2").read().strip("\n")
     if '\n' in width:
         widths = width.split('\n')
         heights = height.split('\n')
