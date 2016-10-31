@@ -30,7 +30,7 @@ crontab -e
 
 Copy the line below and paste
 ```bash
-*/5 * * * * python /home/YOUR_USER_NAME/Downloads/ubuntu-live-wallpaper/wallpaperManager.py
+*/5 * * * * python /home/YOUR_USER_NAME/Downloads/ubuntu-live-wallpaper/wallpaper-changer.py
 ```
 Replace YOUR_USER_NAME by your user name.
 

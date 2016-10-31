@@ -10,12 +10,9 @@
 # python_version  :2.6.6
 # ==============================================================================
 
-from WallpaperManager import get_max_window_size, download_wallpaper, set_wallpaper
+from WallpaperManager import download_wallpaper, set_wallpaper
 from time import sleep
 
-width = get_max_window_size()[0]
-height = get_max_window_size()[1]
-
-wallpaper_file_name = download_wallpaper(width, height)
+wallpaper_file_name = download_wallpaper()
 sleep(1)
 set_wallpaper(wallpaper_file_name)
