@@ -13,6 +13,12 @@
 import sys
 
 args = sys.argv[1:]
+if not args:
+    print(
+        "No argument passed!"
+        "\nHelp: screen-width=1600, screen-height=1600, category=buildings,food,nature,people,technology,objects"
+    )
+
 file_handler = open('db', 'w')
 file_handler.write(str(args))
 file_handler.close()
