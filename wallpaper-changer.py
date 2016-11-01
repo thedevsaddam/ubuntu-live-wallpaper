@@ -10,19 +10,24 @@
 # python_version  :2.6.6
 # ==============================================================================
 
-from WallpaperManager import base_path, get_max_window_size, download_wallpaper, set_wallpaper
+# Import essential libraries
+import os
 from time import sleep
+from helper import log, get_max_window_size
+from WallpaperManager import download_wallpaper, set_wallpaper
+
+# set essential environment variables
+os.environ['SHELL'] = '/bin/sh'
+os.environ['PATH'] = '/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin'
+os.environ['DISPLAY'] = ':0'
 
 try:
     size = get_max_window_size()
     wallpaper_file_name = download_wallpaper(size[0], size[1])
-    sleep(10)
+    sleep(5)
     set_wallpaper(wallpaper_file_name)
-except Exception as e:
-    file_handler = open(base_path('/ubuntu-live-wallpaper.log'), 'w')
-    file_handler.write(str(e.message))
-    file_handler.close()
-finally:
-    wallpaper_file_name = download_wallpaper(size[0], size[1])
-    sleep(10)
+except:
+    log('Unable to detect maximum resolution')
+    wallpaper_file_name = download_wallpaper()
+    sleep(5)
     set_wallpaper(wallpaper_file_name)
