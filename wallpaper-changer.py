@@ -10,7 +10,7 @@
 # python_version  :2.6.6
 # ==============================================================================
 
-from WallpaperManager import get_max_window_size, download_wallpaper, set_wallpaper
+from WallpaperManager import base_path, get_max_window_size, download_wallpaper, set_wallpaper
 from time import sleep
 
 try:
@@ -19,7 +19,7 @@ try:
     sleep(10)
     set_wallpaper(wallpaper_file_name)
 except Exception as e:
-    file_handler = open('ubuntu-live-wallpaper.log', 'w')
+    file_handler = open(base_path('/ubuntu-live-wallpaper.log'), 'w')
     file_handler.write(str(e.message))
     file_handler.close()
 finally:

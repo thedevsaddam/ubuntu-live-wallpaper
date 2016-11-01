@@ -16,6 +16,12 @@ import random
 import urllib
 
 
+def base_path(path=''):
+    """Return base directory path"""
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    return dir_path + path
+
+
 def download_wallpaper(width=1600, height=900):
     """Return the downloaded wallpaper file name"""
 
@@ -27,17 +33,14 @@ def download_wallpaper(width=1600, height=900):
     base_url = "https://source.unsplash.com"
     image_url = base_url + "/category/" + category + "/" + str(width) + "x" + str(height)
 
-    # current directory
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-
     # download image
     try:
         wallpaper_name = 'wallpaper.jpg'
-        response = urllib.urlretrieve(image_url, dir_path + "/" + wallpaper_name)
+        response = urllib.urlretrieve(image_url, base_path("/" + wallpaper_name))
     except:
         wallpaper_name = "default-wallpaper.jpg"  # if download failed show the default wallpaper
 
-    return dir_path + "/" + wallpaper_name
+    return base_path("/" + wallpaper_name)
 
 
 def set_wallpaper(file_name):
@@ -55,9 +58,11 @@ def get_max(list_of_string):
 def get_window_size():
     """Return the window width and height"""
     width = os.popen(
-        "export DISPLAY=:0 && xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f1").read().strip("\n")
+        "export DISPLAY=:0 && xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f1").read().strip(
+        "\n")
     height = os.popen(
-        "export DISPLAY=:0 && xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f2").read().strip("\n")
+        "export DISPLAY=:0 && xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f2").read().strip(
+        "\n")
     if '\n' in width:
         widths = width.split('\n')
         heights = height.split('\n')
