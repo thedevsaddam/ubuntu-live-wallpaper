@@ -63,6 +63,13 @@ def get_max_window_size():
 
 
 def log(message, level='DEBUG'):
-    file_handler = open(base_path('/ubuntu-live-wallpaper.log'), 'a')
-    file_handler.write(str(level) + " -> [" + str(datetime.datetime.now()) + "]: " + str(message) + "\n")
-    file_handler.close()
+    """write a custom log"""
+    try:
+        log_file = base_path('/ubuntu-live-wallpaper.log')
+        file_handler = open(log_file, 'a')
+        if os.path.getsize(log_file) > 5000000:  # if log file is greater than 5mb remove
+            os.remove(log_file)
+        file_handler.write(str(level) + " -> [" + str(datetime.datetime.now()) + "]: " + str(message) + "\n")
+        file_handler.close()
+    except:
+        pass
