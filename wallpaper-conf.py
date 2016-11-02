@@ -11,14 +11,15 @@
 # ==============================================================================
 
 import sys
+from helper import base_path
+from configManager import is_validate_input, store_configuration, get_configuration
 
 args = sys.argv[1:]
 if not args:
     print(
         "No argument passed!"
-        "\nHelp: screen-width=1600, screen-height=1600, category=buildings,food,nature,people,technology,objects"
+        "\nHelp: width=1600, height=900, category=buildings,food,nature,people,technology,objects"
     )
 
-file_handler = open('db', 'w')
-file_handler.write(str(args))
-file_handler.close()
+is_validate_input(args)
+# print(get_configuration('categories'))
