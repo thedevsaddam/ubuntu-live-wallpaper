@@ -12,7 +12,7 @@
 
 import sys
 from helper import base_path
-from configManager import is_validate_input, store_configuration, get_configuration
+from configManager import *
 
 args = sys.argv[1:]
 if not args:
@@ -21,5 +21,23 @@ if not args:
         "\nHelp: width=1600, height=900, category=buildings,food,nature,people,technology,objects"
     )
 
-is_validate_input(args)
-# print(get_configuration('categories'))
+
+def validate_and_store_settings():
+    """Validate the input and store settings"""
+
+    is_input_valid = is_validate_input(args)
+    if is_input_valid:
+        for message in is_input_valid:
+            print("Error: " + message)
+        return False
+    else:
+        # if validation passed the store configuration
+        store_configuration(args)
+
+        if has_input(args, 'default'):
+            if get_input(args, 'default') == 1:
+                default_configuration()  # make default configuration
+
+
+
+validate_and_store_settings()

@@ -16,7 +16,7 @@ import configparser
 
 valid_categories = ["buildings", "food", "nature", "people", "technology", "objects"]
 default_config = {
-    'categories': 'buildings, food, nature, people, technology, objects, ',
+    'categories': 'buildings, food, nature, people, technology, objects',
     'width': '1600',
     'height': '900'
 }
@@ -66,12 +66,50 @@ def has_input(args, key):
                 return True
             else:
                 return False
+    return False
+
+
+def get_input(args, key):
+    """get input value"""
+    for arg in args:
+        if "=" in arg:
+            arg_str = (str(arg).split("="))
+            # check the key
+            if arg_str[0] == key:
+                return arg_str[1]
+            else:
+                return None
+
+
+def default_configuration():
+    """Default configuration"""
+    config = configparser.ConfigParser()
+    config['DEFAULT'] = {'categories': default_config['categories']}
+    config_file = base_path('/config.ini')
+    with open(config_file, 'w') as configfile:
+        config.write(configfile)
 
 
 def store_configuration(args):
     """Store the user provided configuration"""
+
+    if has_input(args, 'category'):
+        category = get_input(args, 'category')
+    else:
+        category = get_config_categories(False)
+
+    if has_input(args, 'width'):
+        width = get_input(args, 'width')
+    else:
+        width = get_config_width()
+
+    if has_input(args, 'height'):
+        height = get_input(args, 'height')
+    else:
+        height = get_config_height()
+
     config = configparser.ConfigParser()
-    config['DEFAULT'] = {'categories': 'people, technology', 'width': '1600', 'height': '900'}
+    config['DEFAULT'] = {'categories': category, 'width': width, 'height': height}
     config_file = base_path('/config.ini')
     with open(config_file, 'w') as configfile:
         config.write(configfile)
@@ -87,14 +125,17 @@ def get_configuration(key=''):
     return config['DEFAULT'][key]
 
 
-def get_config_categories():
+def get_config_categories(list=False):
     """Fetch categories from config"""
     raw_categories = get_configuration('categories')
+    if list:
+        return raw_categories
+
     categories = str(raw_categories).split(",")
     if categories:
         return categories
     else:
-        return valid_categories
+        return default_config['categories']
 
 
 def get_config_width():
@@ -107,7 +148,7 @@ def get_config_width():
 
 def get_config_height():
     """Fetch height from config"""
-    if get_configuration('width'):
-        return get_configuration('width')
+    if get_configuration('height'):
+        return get_configuration('height')
     else:
         return 900
