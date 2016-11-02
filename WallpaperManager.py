@@ -12,7 +12,7 @@
 import os
 import random
 import urllib
-from helper import base_path, log
+from helper import base_path, log, download_image
 
 
 def download_wallpaper(width=1600, height=900):
@@ -29,7 +29,7 @@ def download_wallpaper(width=1600, height=900):
     # download image
     try:
         wallpaper_name = 'wallpaper.jpg'
-        response = urllib.urlretrieve(image_url, base_path("/" + wallpaper_name))
+        response = download_image(image_url, base_path("/" + wallpaper_name))
     except:
         if not os.path.isfile(base_path("/" + wallpaper_name)):  # if previously download wallpaper not exist
             wallpaper_name = "default-wallpaper.jpg"  # show the default wallpaper

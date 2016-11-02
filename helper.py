@@ -10,7 +10,13 @@
 
 # Import essential libraries
 import os
+import sys
 import datetime
+
+if sys.version_info[0] < 3:
+    import urllib
+else:
+    import urllib.request
 
 
 def base_path(path=''):
@@ -20,7 +26,7 @@ def base_path(path=''):
 
 
 def get_max(list_of_string):
-    """Return maximum value form a list of string or integer """
+    """Return maximum value from a list of string or integer """
     return max(map(int, list_of_string))
 
 
@@ -67,9 +73,19 @@ def log(message, level='DEBUG'):
     try:
         log_file = base_path('/ubuntu-live-wallpaper.log')
         file_handler = open(log_file, 'a')
-        if os.path.getsize(log_file) > 5000000:  # if log file is greater than 5mb remove
+        if os.path.getsize(log_file) > 5000000:  # if log file is greater 5mb then remove
             os.remove(log_file)
         file_handler.write(str(level) + " -> [" + str(datetime.datetime.now()) + "]: " + str(message) + "\n")
         file_handler.close()
     except:
         pass
+
+
+def download_image(image_url, file_name):
+    """Download image from url"""
+    if sys.version_info[0] < 3:
+        response = urllib.urlretrieve(image_url, file_name)
+    else:
+        response = urllib.request.urlretrieve(image_url, file_name)
+
+    return response
