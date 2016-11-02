@@ -10,8 +10,8 @@
 # python_version  :2.6.6
 # ==============================================================================
 
+# Import essential libraries
 import sys
-from helper import base_path
 from configManager import *
 
 args = sys.argv[1:]
@@ -34,10 +34,9 @@ def validate_and_store_settings():
         # if validation passed the store configuration
         store_configuration(args)
 
-        if has_input(args, 'default'):
-            if get_input(args, 'default') == 1:
-                default_configuration()  # make default configuration
-
+        # if has_input(args, 'default'):
+            # if get_input(args, 'default') == 1:
+            #     default_configuration()  # make default configuration
 
 
 validate_and_store_settings()

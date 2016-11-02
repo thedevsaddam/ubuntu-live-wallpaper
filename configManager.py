@@ -96,7 +96,7 @@ def store_configuration(args):
     if has_input(args, 'category'):
         category = get_input(args, 'category')
     else:
-        category = get_config_categories(False)
+        category = get_config_categories(True)
 
     if has_input(args, 'width'):
         width = get_input(args, 'width')
@@ -125,11 +125,14 @@ def get_configuration(key=''):
     return config['DEFAULT'][key]
 
 
-def get_config_categories(list=False):
+def get_config_categories(raw=False):
     """Fetch categories from config"""
     raw_categories = get_configuration('categories')
-    if list:
-        return raw_categories
+    if raw:
+        if raw_categories:
+            return raw_categories
+        else:
+            return default_config['categories']
 
     categories = str(raw_categories).split(",")
     if categories:
