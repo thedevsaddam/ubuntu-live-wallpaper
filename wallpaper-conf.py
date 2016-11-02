@@ -12,31 +12,28 @@
 
 # Import essential libraries
 import sys
-from configManager import *
+from configManager import set_categories, has_error, get_categories
 
 args = sys.argv[1:]
 if not args:
     print(
         "No argument passed!"
-        "\nHelp: width=1600, height=900, category=buildings,food,nature,people,technology,objects"
+        "\nHelp:Provide any category you want. category=buildings,food,nature,people,technology,objects"
     )
 
 
 def validate_and_store_settings():
     """Validate the input and store settings"""
+    error_messages = has_error(args)
 
-    is_input_valid = is_validate_input(args)
-    if is_input_valid:
-        for message in is_input_valid:
-            print("Error: " + message)
+    if error_messages:
+        for message in error_messages:
+            print("Error: " + str(message))
         return False
     else:
         # if validation passed the store configuration
-        store_configuration(args)
-
-        # if has_input(args, 'default'):
-            # if get_input(args, 'default') == 1:
-            #     default_configuration()  # make default configuration
-
+        categories = str(args[0]).split("=")[1]
+        set_categories(categories)
+        print("Configuration saved successfully!\n")
 
 validate_and_store_settings()
