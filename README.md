@@ -37,8 +37,28 @@ Replace YOUR_USER_NAME by your user name.
 _Note:  To get username type `whoami` in interminal_
 
 The Cron job will run the script every five minutes and change the wallpaper. You can configure the Cron job to change the refresh time.
+
+__If  you want set wallpaper category__
+```bash
+cd ~/Downloads/ubuntu-live-wallpaper/
+```
+then run the command below:
+
+```bash
+./wallpaper-conf.py category=category1,category2
+```
+
+#### Available category
+* food
+* nature
+* people
+* technology
+* buildings
+* objects
+
+
 ### TODO
-* Detect largest resolution among the connected monitors
+* ~~Detect largest resolution among the connected monitors~~
 * Change wallpaper by season
 * Change wallpaper by morning, mid-day, evening and night
 * Easy installation
