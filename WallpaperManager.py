@@ -13,13 +13,14 @@ import os
 import random
 import urllib
 from helper import base_path, log, download_image
+from configManager import get_categories
 
 
 def download_wallpaper(width=1600, height=900):
     """Return the downloaded wallpaper file name"""
 
     # available categories
-    categories = ["buildings", "food", "nature", "people", "technology", "objects"]
+    categories = get_categories()
     category = random.choice(categories)
 
     # image url

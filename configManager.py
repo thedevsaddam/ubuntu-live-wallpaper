@@ -11,9 +11,10 @@
 # ==============================================================================
 
 # Import essential libraries
+import os
 from helper import base_path
 
-categories = 'buildings, food, nature, people, technology, objects'
+categories = 'buildings,food,nature,people,technology,objects'
 
 
 def set_categories(input_categories):
@@ -25,7 +26,11 @@ def set_categories(input_categories):
 
 def get_categories():
     """Fetch user defined categories"""
-    file_handler = open(base_path('/config'), 'r')
+    file = base_path('/config')
+    if not os.path.isfile(file):
+        file_handler = open(file, 'w')
+        file_handler.close()
+    file_handler = open(file, 'r')
     stored_categories = file_handler.readline()
     file_handler.close()
     category_list = str(stored_categories).split(",")
@@ -48,5 +53,6 @@ def has_error(args):
                 for input_cat in input_categories:
                     if input_cat not in valid_categories:
                         error_bag.append('Invalid category name ' + input_cat)
+                        break
 
     return error_bag

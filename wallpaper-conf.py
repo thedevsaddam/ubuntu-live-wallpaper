@@ -12,7 +12,7 @@
 
 # Import essential libraries
 import sys
-from configManager import set_categories, has_error, get_categories
+from configManager import set_categories, has_error
 
 args = sys.argv[1:]
 if not args:
@@ -26,14 +26,16 @@ def validate_and_store_settings():
     """Validate the input and store settings"""
     error_messages = has_error(args)
 
-    if error_messages:
-        for message in error_messages:
-            print("Error: " + str(message))
-        return False
-    else:
-        # if validation passed the store configuration
-        categories = str(args[0]).split("=")[1]
-        set_categories(categories)
-        print("Configuration saved successfully!\n")
+    if args and "=" in args[0]:
+        if error_messages:
+            for message in error_messages:
+                print("Error: " + str(message))
+            return False
+        else:
+            # if validation passed the store configuration
+            categories = str(args[0]).split("=")[1]
+            set_categories(categories)
+            print("Configuration saved successfully!\n")
+
 
 validate_and_store_settings()
