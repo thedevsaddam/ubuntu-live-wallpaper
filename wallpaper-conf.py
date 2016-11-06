@@ -18,7 +18,7 @@ args = sys.argv[1:]
 if not args:
     print(
         "No argument passed!"
-        "\nHelp:Provide any category you want. category=buildings,food,nature,people,technology,objects"
+        "\nHelp:Provide any category you want. category=buildings,food,nature,people,technology,objects\ntag=mac,ipad"
     )
 
 
