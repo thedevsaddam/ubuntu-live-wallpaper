@@ -38,14 +38,14 @@ _Note:  To get username type `whoami` in interminal_
 
 The Cron job will run the script every five minutes and change the wallpaper. You can configure the Cron job to change the refresh time.
 
-__If  you want set wallpaper category__
+__If  you want set wallpaper category and tag__
 ```bash
 cd ~/Downloads/ubuntu-live-wallpaper/
 ```
 then run the command below:
 
-```bash
-./wallpaper-conf.py category=category1,category2
+```python
+./wallpaper-conf.py category=category1,category2 tag=tag1,tag2
 ```
 
 #### Available category
@@ -55,6 +55,15 @@ then run the command below:
 * technology
 * buildings
 * objects
+
+__Note:__ Tags are the keyword to find specific wallpaper in a category. Please use some relevant `tag` with `category`. `DO NOT USE MULTIPLE CATEGORY WITH MULTIPLE TAG`
+
+Good example of custom configuration is given below:
+```python
+./wallpaper-conf.py category=technology tag=mac,ipad
+
+./wallpaper-conf.py category=nature tag=sea,river
+```
 
 
 ### TODO
