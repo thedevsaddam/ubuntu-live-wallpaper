@@ -19,14 +19,14 @@ categories = 'buildings,food,nature,people,technology,objects'
 
 def set_categories(input_categories):
     """set user defined categories"""
-    file_handler = open(base_path('/config'), 'w')
+    file_handler = open(base_path('/configs/category'), 'w')
     file_handler.write(str(input_categories))
     file_handler.close()
 
 
 def get_categories():
     """Fetch user defined categories"""
-    file = base_path('/config')
+    file = base_path('/configs/category')
     if not os.path.isfile(file):
         file_handler = open(file, 'w')
         file_handler.close()
