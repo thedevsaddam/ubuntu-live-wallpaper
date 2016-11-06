@@ -13,7 +13,7 @@ import os
 import random
 import urllib
 from helper import base_path, log, download_image
-from configManager import get_categories
+from configManager import get_categories, get_tags
 
 
 def download_wallpaper(width=1600, height=900):
@@ -25,7 +25,8 @@ def download_wallpaper(width=1600, height=900):
 
     # image url
     base_url = "https://source.unsplash.com"
-    image_url = base_url + "/category/" + category + "/" + str(width) + "x" + str(height)
+    tags = get_tags()
+    image_url = base_url + "/category/" + category + "/" + str(width) + "x" + str(height) + "?" + tags
 
     # download image
     try:

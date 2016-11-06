@@ -56,3 +56,25 @@ def has_error(args):
                         break
 
     return error_bag
+
+
+def set_tags(input_tags):
+    """set user defined tags"""
+    file_handler = open(base_path('/configs/tag'), 'w')
+    file_handler.write(str(input_tags))
+    file_handler.close()
+
+
+def get_tags():
+    """Fetch user defined tags"""
+    file = base_path('/configs/tag')
+    if not os.path.isfile(file):
+        file_handler = open(file, 'w')
+        file_handler.close()
+    file_handler = open(file, 'r')
+    stored_tags = file_handler.readline()
+    file_handler.close()
+    if bool(stored_tags):
+        return stored_tags
+    else:
+        return ""
