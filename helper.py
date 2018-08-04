@@ -72,11 +72,13 @@ def log(message, level='DEBUG'):
     """write a custom log"""
     try:
         log_file = base_path('/ubuntu-live-wallpaper.log')
-        file_handler = open(log_file, 'a')
-        if os.path.getsize(log_file) > 5000000:  # if log file is greater 5mb then remove
-            os.remove(log_file)
-        file_handler.write(str(level) + " -> [" + str(datetime.datetime.now()) + "]: " + str(message) + "\n")
-        file_handler.close()
+
+        with open(log_file, 'a') as file_handler:
+            # if log file is greater 5mb then remove
+            if os.path.getsize(log_file) > 5000000:
+                os.remove(log_file)
+            file_handler.write(
+                str(level) + " -> [" + str(datetime.datetime.now()) + "]: " + str(message) + "\n")
     except:
         pass
 

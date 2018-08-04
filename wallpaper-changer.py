@@ -10,9 +10,9 @@
 # python_version  :2.6.6
 # ==============================================================================
 
-# Import essential libraries
 import os
 from time import sleep
+
 from helper import log, get_max_window_size
 from WallpaperManager import download_wallpaper, set_wallpaper
 
