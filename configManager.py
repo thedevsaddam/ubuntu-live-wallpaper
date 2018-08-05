@@ -10,7 +10,6 @@
 # python_version  :2.6.6
 # ==============================================================================
 
-# Import essential libraries
 import os
 from helper import base_path
 
@@ -19,21 +18,21 @@ categories = 'buildings,food,nature,people,technology,objects'
 
 def set_categories(input_categories):
     """set user defined categories"""
-    file_handler = open(base_path('/configs/category'), 'w')
-    file_handler.write(str(input_categories))
-    file_handler.close()
+    with open(base_path('/configs/category'), 'w') as file_handler:
+        file_handler.write(str(input_categories))
 
 
 def get_categories():
     """Fetch user defined categories"""
     file = base_path('/configs/category')
     if not os.path.isfile(file):
-        file_handler = open(file, 'w')
-        file_handler.close()
-    file_handler = open(file, 'r')
-    stored_categories = file_handler.readline()
-    file_handler.close()
+        with open(file, 'w') as file_handler:
+            pass
+
+    with open(file, 'r') as file_handler:
+        stored_categories = file_handler.readline()
     category_list = str(stored_categories).split(",")
+
     if bool(stored_categories):
         return category_list
     else:
@@ -59,21 +58,21 @@ def has_error(args):
 
 
 def set_tags(input_tags):
-    """set user defined tags"""
-    file_handler = open(base_path('/configs/tag'), 'w')
-    file_handler.write(str(input_tags))
-    file_handler.close()
+    """Set user defined tags"""
+    with open(base_path('/configs/tag'), 'w') as file_handler:
+        file_handler.write(str(input_tags))
 
 
 def get_tags():
     """Fetch user defined tags"""
     file = base_path('/configs/tag')
     if not os.path.isfile(file):
-        file_handler = open(file, 'w')
-        file_handler.close()
-    file_handler = open(file, 'r')
-    stored_tags = file_handler.readline()
-    file_handler.close()
+        with open(file, 'w') as file_handler:
+            pass
+
+    with open(file, 'r') as file_handler:
+        stored_tags = file_handler.readline()
+
     if bool(stored_tags):
         return stored_tags
     else:
