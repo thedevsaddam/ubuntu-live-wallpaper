@@ -11,6 +11,7 @@
 import os
 import random
 import urllib
+import platform
 
 from helper import base_path, log, download_image
 from configManager import get_categories, get_tags
@@ -45,7 +46,9 @@ def download_wallpaper(width=1600, height=900):
 def set_wallpaper(file_name):
     """Set wallpaper"""
     dbus_session_bus_address = "PID=$(pgrep gnome-session) && export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2-) && "
-    command = "{}gsettings set org.gnome.desktop.background picture-uri file:///{}".format(
-        dbus_session_bus_address, file_name)
+
+    command = "{}gsettings set org.gnome.desktop.background picture-uri file:///{}".format(dbus_session_bus_address, file_name)
+    if platform.linux_distribution()[0] == 'LinuxMint':
+        command = "{}gsettings set org.cinnamon.desktop.background picture-uri file:///{}".format(dbus_session_bus_address, file_name)
 
     os.system(command)
